@@ -46,4 +46,22 @@ contract('MyAdvancedToken', function(accounts) {
       });
   })
 
+  it("5th test", function() {
+      var mat = MyAdvancedToken.new(5000,'samuel',100,'sam',minter.address)
+      .then(function(instance1) {
+          return instance1.transfer(bob.address,1000);
+      }).then(function(instance2) {
+          assert(1,1,"one is not one")
+      });
+
+      return MyAdvancedToken.deployed().then(function(instance) {
+        return instance.getBalance.call(accounts[0]);
+      }).then(function(balance) {
+        console.log(balance)
+        //assert.equal(balance.valueOf(), 10000, "10000 wasn't in the first account");
+      });
+
+  })
+
+
 });
