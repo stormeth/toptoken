@@ -2,7 +2,7 @@ var TestUtils = require('./testutils')
 
 var MyAdvancedToken = artifacts.require("./MyAdvancedToken.sol");
 
-contract('MyAdvancedToken', function(accounts) {
+contract('Mat1', function(accounts) {
 
     var owner = {}
     var bob = {}

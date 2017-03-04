@@ -1,6 +1,6 @@
 var MyAdvancedToken = artifacts.require("./MyAdvancedToken.sol");
 
-contract('MyAdvancedToken', function(accounts) {
+contract('Mat0', function(accounts) {
 
     var bob = {}
     var minter = {};
