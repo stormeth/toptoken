@@ -25,15 +25,20 @@ contract('Mat2', function(accounts) {
         return MyAdvancedToken.new(5000, 'samuel', 100, 'sam', minter.address)
             .then(function(instance1) {
                 return instance1.transfer(bob.address, 1000);
-            }).then(function(instance2) {
+            }).then(function(tx1) {
                 assert(1,1,'1 not 1')
+                //console.log(tx1)
+            }).then(MyAdvancedToken.deployed().then(function(instance2) {
+                return instance2.getBalance.call(bob.address);
+            }).then(function(balance1) {
+                console.log(balance1);
             }).then(MyAdvancedToken.deployed().then(function(instance3) {
                 return instance3.getBalance.call(bob.address);
-            }).then(function(balance) {
-                console.log(balance)
-                //assert.equal(balance.valueOf(), 10000, "10000 wasn't in the first account");
+            }).then(function(balance2) {
+                console.log(balance2);
             })
-        )
+        ))
+
     })
 
 });
