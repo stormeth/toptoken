@@ -22,18 +22,22 @@ contract('MyAdvancedToken', function(accounts) {
       console.log("minter = ", minter.address)
   }
 
-  function showBalance() {
-      printAddresses()
-      return MyAdvancedToken.deployed().then(function(instance) {
-        return instance.getBalance.call(accounts[0]);
-      }).then(function(balance) {
-        console.log(balance)
-        //assert.equal(balance.valueOf(), 10000, "10000 wasn't in the first account");
-      });
+  function showBalances() {
+      //printAddresses()
+      people = [owner,bob,pete,minter]
+      people.forEach(function(s) {
+          return MyAdvancedToken.deployed().then(function(instance) {
+            return instance.getBalance.call(s.address);
+          }).then(function(balance) {
+            console.log(balance)
+            //assert.equal(balance.valueOf(), 10000, "10000 wasn't in the first account");
+          });
+
+      })
   }
 
   it("1st test", function() {
-      showBalance()
+      showBalances()
   });
 
 
