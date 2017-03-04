@@ -9,45 +9,51 @@ contract('MyAdvancedToken', function(accounts) {
 
     before("Setup the scenario", function() {
         owner.address = accounts[0]
+        owner.whoami = 'owner'
         bob.address = accounts[1];
+        bob.whoami = 'bob'
         pete.address = accounts[2]
+        pete.whoami = 'pete'
         minter.address = accounts[3]
-        return owner,bob,pete,minter;
+        minter.whoami = 'minter'
+        return owner, bob, pete, minter;
     });
 
-  function printAddresses() {
-      console.log("owner = ", owner.address);
-      console.log("bob = ", bob.address);
-      console.log("pete = ", pete.address);
-      console.log("minter = ", minter.address)
-  }
+    function printAddresses() {
+        console.log(owner.whoami, " ", owner.address);
+        console.log(bob.whoami, " ", bob.address);
+        console.log(pete.whoami, " ", pete.address);
+        console.log(minter.whoami, " ", minter.address)
+    }
 
-  function showBalances() {
-      //printAddresses()
-      people = [owner,bob,pete,minter]
-      people.forEach(function(s) {
-          return MyAdvancedToken.deployed().then(function(instance) {
+    function showBalance(s) {
+        return MyAdvancedToken.deployed().then(function(instance) {
             return instance.getBalance.call(s.address);
-          }).then(function(balance) {
-            console.log(balance)
-            //assert.equal(balance.valueOf(), 10000, "10000 wasn't in the first account");
-          });
+        }).then(function(balance) {
+            console.log(s.whoami, " ", balance)
+        });
+    }
 
-      })
-  }
+    function showBalances() {
+        printAddresses()
+        people = [owner, bob, pete, minter]
+        people.forEach(function(s) {
+            showBalance(s)
+        })
+    }
 
-  it("1st test", function() {
-      showBalances()
-  });
+    it("1st test", function() {
+        showBalances()
+    });
 
 
-  it("2nd test", function() {
-      return MyAdvancedToken.new(5000,'samuel',100,'sam',minter.address)
-      .then(function(instance) {
-          return instance.getBalance.call(bob.address);
-      }).then(function(balance) {
-          console.log(balance);
-      });
-  });
+    it("2nd test", function() {
+        return MyAdvancedToken.new(5000, 'samuel', 100, 'sam', minter.address)
+            .then(function(instance) {
+                return instance.getBalance.call(bob.address);
+            }).then(function(balance) {
+                showBalance(minter);
+            });
+    });
 
 });
