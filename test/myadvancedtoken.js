@@ -37,5 +37,13 @@ contract('MyAdvancedToken', function(accounts) {
       }).catch()
   });
 
+  it("4th test", function() {
+      return MyAdvancedToken.new(5000,'samuel',100,'sam',minter.address)
+      .then(function(instance1) {
+          return instance1.transfer(bob.address,1000);
+      }).then(function(instance2) {
+          console.log(instance2)
+      });
+  })
 
 });
