@@ -2,11 +2,13 @@ var MyAdvancedToken = artifacts.require("./MyAdvancedToken.sol");
 
 contract('MyAdvancedToken', function(accounts) {
 
+    var bob = {}
     var minter = {};
 
     before("Setup the scenario", function() {
+        bob.address = accounts[0]
         minter.address = accounts[1];
-        return minter;
+        return bob,minter;
     });
 
   it("1st test", function() {
@@ -18,13 +20,22 @@ contract('MyAdvancedToken', function(accounts) {
     });
   });
 
-  it("2nd test", function(done) {
+
+  it("2nd test", function() {
       return MyAdvancedToken.new(5000,'samuel',100,'sam',minter.address)
       .then(function(instance) {
-          return instance.getBalance.call(accounts[0]);
+          return instance.getBalance.call(bob.address);
       }).then(function(balance) {
           console.log(balance);
       });
   });
+
+  it("3rd test", function() {
+      return MyAdvancedToken.new(5000,'samuel',100,'sam',minter.address)
+      .then(function(instance) {
+          return instance.getBalance.call(bob.address);
+      }).catch()
+  });
+
 
 });
