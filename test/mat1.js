@@ -4,16 +4,26 @@ contract('MyAdvancedToken', function(accounts) {
 
     var owner = {}
     var bob = {}
+    var pete = {}
     var minter = {};
 
     before("Setup the scenario", function() {
         owner.address = accounts[0]
         bob.address = accounts[1];
-        minter.address = accounts[2]
-        return owner,bob,minter;
+        pete.address = accounts[2]
+        minter.address = accounts[3]
+        return owner,bob,pete,minter;
     });
 
+  function printAddresses() {
+      console.log("owner = ", owner.address);
+      console.log("bob = ", bob.address);
+      console.log("pete = ", pete.address);
+      console.log("minter = ", minter.address)
+  }
+
   function showBalance() {
+      printAddresses()
       return MyAdvancedToken.deployed().then(function(instance) {
         return instance.getBalance.call(accounts[0]);
       }).then(function(balance) {
