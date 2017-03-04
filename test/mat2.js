@@ -27,8 +27,8 @@ contract('Mat2', function(accounts) {
                 return instance1.transfer(bob.address, 1000);
             }).then(function(instance2) {
                 assert(1,1,'1 not 1')
-            }).then(MyAdvancedToken.deployed().then(function(instance) {
-                return instance.getBalance.call(accounts[0]);
+            }).then(MyAdvancedToken.deployed().then(function(instance3) {
+                return instance3.getBalance.call(bob.address);
             }).then(function(balance) {
                 console.log(balance)
                 //assert.equal(balance.valueOf(), 10000, "10000 wasn't in the first account");
