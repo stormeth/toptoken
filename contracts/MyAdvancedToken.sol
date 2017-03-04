@@ -1,4 +1,7 @@
 pragma solidity ^0.4.2;
+
+import "./ConvertLib.sol";
+
 contract owned {
     address public owner;
 
@@ -85,6 +88,14 @@ contract token {
         Transfer(_from, _to, _value);
         return true;
     }
+
+    function getBalanceInEth(address addr) returns(uint){
+		return ConvertLib.convert(getBalance(addr),2);
+	}
+
+	function getBalance(address addr) returns(uint) {
+		return balanceOf[addr];
+	}
 
     /* This unnamed function is called whenever someone tries to send ether to it */
     function () {
