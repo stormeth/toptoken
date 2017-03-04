@@ -1,3 +1,5 @@
+var TestUtils = require('./testutils')
+
 var MyAdvancedToken = artifacts.require("./MyAdvancedToken.sol");
 
 contract('MyAdvancedToken', function(accounts) {
@@ -19,31 +21,9 @@ contract('MyAdvancedToken', function(accounts) {
         return owner, bob, pete, minter;
     });
 
-    function printAddresses() {
-        console.log(owner.whoami, " ", owner.address);
-        console.log(bob.whoami, " ", bob.address);
-        console.log(pete.whoami, " ", pete.address);
-        console.log(minter.whoami, " ", minter.address)
-    }
-
-    function showBalance(s) {
-        return MyAdvancedToken.deployed().then(function(instance) {
-            return instance.getBalance.call(s.address);
-        }).then(function(balance) {
-            console.log(s.whoami, " ", balance)
-        });
-    }
-
-    function showBalances() {
-        printAddresses()
-        people = [owner, bob, pete, minter]
-        people.forEach(function(s) {
-            showBalance(s)
-        })
-    }
-
     it("1st test", function() {
-        showBalances()
+        var people = [owner, bob, pete, minter]
+        TestUtils.showBalances(people)
     });
 
 
@@ -52,7 +32,7 @@ contract('MyAdvancedToken', function(accounts) {
             .then(function(instance) {
                 return instance.getBalance.call(bob.address);
             }).then(function(balance) {
-                showBalance(minter);
+                TestUtils.showBalance(minter);
             });
     });
 
