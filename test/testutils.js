@@ -1,4 +1,3 @@
-
 var MyAdvancedToken = artifacts.require("./MyAdvancedToken.sol");
 
 var TestUtils = {
